@@ -1,0 +1,42 @@
+into \docs\drawing.dbf put \vendor\drawing.dbf
+rep draw_no with drawing
+rep distcode with order
+rep equip_no with tag_no
+rep client_no with client_no
+rep title with title
+rep rev_no with revision
+rep remarks with comments
+
+into \docs\distname put \vendor\orders
+rep distcode with order
+rep descript with descript
+
+into \docs\distcode put \vendor\distcode
+rep compcode with compcode
+rep distcode with order
+rep fs_copy with fs_Copy
+rep a3_copy with a3_copy
+
+into \docs\company put \vendor\company
+rep compcode with compcode
+rep name with name
+rep street with street
+rep town with town
+rep attention with attention
+rep telephone with telephone
+rep fs_copy with fs_Copy
+rep a3_copy with a3_copy
+rep dist with dist
+rep selc with selc
+
+into \docs\rev put \vendor\history
+rep draw_no with drawing
+rep rev_no with rev
+rep remarks with comments
+
+into \docs\issue put \vendor\issue
+rep issue with issue
+rep draw_no with drawing
+rep rev_no with revision
+rep selc with selc
+
