@@ -124,3 +124,96 @@ SELECT a
 USE
 Select b
 USE
+
+
+/**
+    dbUseArea( .T.,,"\docs\drawing.dbf", "ddrawing", .T. )
+    dbUseArea( .T.,,"\vendor\drawing.dbf", "vdrawing", .T. )
+    dbgotop()
+    while !(vdrawing->(end()))
+        ddrawing->dbappend()
+        ddrawing->draw_no   := vdrawing->drawing
+        ddrawing->distcode  := vdrawing->order
+        ddrawing->equip_no  := vdrawing->tag_no
+        ddrawing->client_no := vdrawing->client_no
+        ddrawing->title     := vdrawing->title
+        ddrawing->rev_no    := vdrawing->revision
+        ddrawing->remarks   := vdrawing->comments
+        vdrawing->dbskip()
+    enddo
+    ddrawing->(dbCloseArea())
+    vdrawing->(dbCloseArea())
+
+    dbUseArea( .T.,,"\docs\distname", "distname", .T. )
+    dbUseArea( .T.,,"\vendor\orders", "orders", .T. )
+    dbgotop()
+    while !(orders->(EOF()))
+        distname->dbappend()
+        distname->distcode := orders->order
+        distname->descript := orders->descript
+        orders->dbskip()
+    enddo
+    distname->(dbCloseArea())
+    orders->(dbCloseArea())
+
+    dbUseArea( .T.,,"\docs\distcode", "ddistcode", .T. )
+    dbUseArea( .T.,,"\vendor\distcode", "vdistcode", .T. )
+    dbgotop()
+    while !(b->(EOF()))
+        ddistcode->dbappend()
+        ddistcode->compcode := vdistcode->compcode
+        ddistcode->distcode := vdistcode->order
+        ddistcode->fs_copy  := vdistcode->fs_Copy
+        ddistcode->a3_copy  := vdistcode->a3_copy
+        vdistcode->dbskip()
+    enddo
+    ddistcode->(dbCloseArea())
+    vdistcode->(dbCloseArea())
+
+    dbUseArea( .T.,,"\docs\company", "dcompany", .T. )
+    dbUseArea( .T.,,"\vendor\company", "vcompany", .T. )
+    dbgotop()
+    while !(vcompany->(EOF()))
+        dcompany->dbappend()
+        dcompany->compcode  := vcompany->compcode
+        dcompany->name      := vcompany->name
+        dcompany->street    := vcompany->street
+        dcompany->town      := vcompany->town
+        dcompany->attention := vcompany->attention
+        dcompany->telephone := vcompany->telephone
+        dcompany->fs_copy   := vcompany->fs_Copy
+        dcompany->a3_copy   := vcompany->a3_copy
+        dcompany->dist      := vcompany->dist
+        dcompany->selc      := vcompany->selc
+        vcompany->dbskip()
+    enddo
+    dcompany->(dbCloseArea())
+    vcompany->(dbCloseArea())
+
+    dbUseArea( .T.,,"\docs\rev", "rev", .T. )
+    dbUseArea( .T.,,"\vendor\history", "history", .T. )
+    dbgotop()
+    while !(history->(EOF()))
+        rev->dbappend()
+        rev->draw_no := history->drawing
+        rev->rev_no  := history->rev
+        rev->remarks := history->comments
+        history->dbskip()
+    enddo
+    rev->(dbCloseArea())
+    history->(dbCloseArea())
+
+    dbUseArea( .T.,,"\docs\issue", "dissue", .T. )
+    dbUseArea( .T.,,"\vendor\issue", "vissue", .T. )
+    dbgotop()
+    while !(vissue->(EOF()))
+        dissue->dbappend()
+        dissue->issue   := vissue->issue
+        dissue->draw_no := vissue->drawing
+        dissue->rev_no  := vissue->revision
+        dissue->selc    := vissue->selc
+        vissue->dbskip()
+    enddo
+    dissue->(dbCloseArea())
+    vissue->(dbCloseArea())
+**/
